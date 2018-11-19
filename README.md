@@ -9,8 +9,8 @@ Materiales disponibles:
 
 División de tareas a la hora de los tests:
 -Videos:            Ana
--Telemetría:        
--Código:            
+-Telemetría:        Oscar
+-Código:            Pelayo
 -Monitorear robot:  
 
 Codigo de colores cables:
@@ -20,8 +20,9 @@ Codigo de colores cables:
     -Rojo:   Vin
     -Negro:  GND
   Control:
-    -Verde: Entrada impares Motor1: Out 09-10 
-    -Azul:  Entrada pares   Motor2: Out 11-12
+    -Amarillo:  Enable Motor1: Out 07, Motor2: Out 08
+    -Verde:     Entrada impares Motor1: Out 09-10 
+    -Azul:      Entrada pares   Motor2: Out 11-12
     /por ahora se está controlando exclusivamente el sentido de giro, por ello los ENA y ENB están corticircuitados
 
 -Motores:
