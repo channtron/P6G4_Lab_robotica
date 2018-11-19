@@ -34,8 +34,7 @@ Codigo de colores cables:
   -Azul:      Echo    pares    Sensor2: 52-53
   
 -Bluetooth HC-05
-  -Azul:      Tx
-  -Amarillo:  Rx
-  -Marron:    Enable
+  -Azul:      Tx (Pin 19 Rx)
+  -Amarillo:  Rx (Pin 18 Tx)
   -Morado:    +5V
   -Negro:     GND
