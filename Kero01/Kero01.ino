@@ -1,76 +1,112 @@
-// Motor 1
-int IN1 = 9;
-int IN2 = 10;
+// Motor 1, o1 high, o2 low forward, vel pwm value
+int M1O1 = 9;
+int M1O2 = 10; 
+int V1   = 7;
 
-// Motor 2
-int IN3 = 11;
-int IN4 = 12;
+// Motor 2, o1 high, o2 low forward, vel pwm value
+int M2O1 = 11;
+int M2O2 = 12;
+int V2   = 8;
 
 
 void setup() {
-  pinMode (IN1, OUTPUT);
-  pinMode (IN2, OUTPUT);
-  pinMode (IN3, OUTPUT);
-  pinMode (IN4, OUTPUT);
-
+  // setup motor pin
+  // Motor 1
+  pinMode (M1O1, OUTPUT);
+  pinMode (M1O2, OUTPUT);
+  pinMode (V1,   OUTPUT);
+  // Motor 2
+  pinMode (M2O1, OUTPUT);
+  pinMode (M2O2, OUTPUT);
+  pinMode (V2,   OUTPUT);
+  
 }
 
 void loop() {
-//  Horario();
-//Antihorario();
-GiroDech();
-//  Avance();
-//  delay (1000);
-//  Retroceso();
-//  delay (1000);
+  Avance(100);
+  delay (1000);
+  Retroceso(100);
+  delay (1000);
+  Horario(100);
+  delay (1000);
+  Antihorario(100);
+  delay (1000);
+  GiroDech(100);
+  delay (1000);
+  GiroIzq(100);
+  delay (1000);
+
+  
 }
 
-void Avance ()
+void Avance (int v)
 {
  //Direccion motor A
- digitalWrite (IN1, HIGH);
- digitalWrite (IN2, LOW);
+ digitalWrite (M1O1, HIGH);
+ digitalWrite (M1O2, LOW);
+ analogWrite  (V1,   v);
  //Direccion motor B
- digitalWrite (IN3, HIGH);
- digitalWrite (IN4, LOW);
+ digitalWrite (M2O1, HIGH);
+ digitalWrite (M2O2, LOW);
+ analogWrite  (V2,   v);
 }
 
-void Retroceso ()
+void Retroceso (int v)
 {
  //Direccion motor A
- digitalWrite (IN1, LOW);
- digitalWrite (IN2, HIGH);
+ digitalWrite (M1O1, LOW);
+ digitalWrite (M1O2, HIGH);
+ analogWrite  (V1,   v);
  //Direccion motor B
- digitalWrite (IN3, LOW);
- digitalWrite (IN4, HIGH);
+ digitalWrite (M2O1, LOW);
+ digitalWrite (M2O2, HIGH);
+ analogWrite  (V2,   v);
 }
 
-void Horario ()
+void Horario (int v)
 {
  //Direccion motor A
- digitalWrite (IN1, HIGH);
- digitalWrite (IN2, LOW);
+ digitalWrite (M1O1, HIGH);
+ digitalWrite (M1O2, LOW);
+ analogWrite  (V1,   v);
  //Direccion motor B
- digitalWrite (IN3, LOW);
- digitalWrite (IN4, LOW);
+ digitalWrite (M2O1, LOW);
+ digitalWrite (M2O2, LOW);
+ analogWrite  (V2,   0);
 }
 
-void Antihorario ()
+void Antihorario (int v)
 {
  //Direccion motor A
- digitalWrite (IN1, LOW);
- digitalWrite (IN2, LOW);
+ digitalWrite (M1O1, LOW);
+ digitalWrite (M1O2, LOW);
+ analogWrite  (V1,   0);
  //Direccion motor B
- digitalWrite (IN3, HIGH);
- digitalWrite (IN4, LOW);
+ digitalWrite (M2O1, HIGH);
+ digitalWrite (M2O2, LOW);
+ analogWrite  (V2,   v);
 }
 
-void GiroDech ()
+void GiroDech (int v)
 {
  //Direccion motor A
- digitalWrite (IN1, HIGH);
- digitalWrite (IN2, LOW);
+ digitalWrite (M1O1, HIGH);
+ digitalWrite (M1O2, LOW);
+ analogWrite  (V1,   v);
  //Direccion motor B
- digitalWrite (IN3, LOW);
- digitalWrite (IN4, HIGH);
+ digitalWrite (M2O1, HIGH);
+ digitalWrite (M2O2, LOW);
+ analogWrite  (V2,   v*0.3);
+}
+
+void GiroIzq (int v)
+{
+ //Direccion motor A
+ digitalWrite (M1O1, HIGH);
+ digitalWrite (M1O2, LOW);
+ analogWrite  (V1,   v*0.3);
+ //Direccion motor B
+ digitalWrite (M2O1, HIGH);
+ digitalWrite (M2O2, LOW);
+ analogWrite  (V2,   v);
 }
