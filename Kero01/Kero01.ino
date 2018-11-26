@@ -25,16 +25,16 @@ void setup() {
 void loop() {
   Avance(100);
   delay (1000);
-  Retroceso(100);
+  Retroceso(150);
   delay (1000);
-  Horario(100);
-  delay (1000);
-  Antihorario(100);
-  delay (1000);
-  GiroDech(100);
-  delay (1000);
-  GiroIzq(100);
-  delay (1000);
+  Horario(255);
+  delay (1500);
+  Antihorario(255);
+  delay (1500);
+  GiroDech(150);
+  delay (2000);
+  GiroIzq(150);
+  delay (2000);
 
   
 }
@@ -48,7 +48,7 @@ void Avance (int v)
  //Direccion motor B
  digitalWrite (M2O1, HIGH);
  digitalWrite (M2O2, LOW);
- analogWrite  (V2,   v);
+ analogWrite  (V2,   v*1.05);
 }
 
 void Retroceso (int v)
@@ -60,7 +60,7 @@ void Retroceso (int v)
  //Direccion motor B
  digitalWrite (M2O1, LOW);
  digitalWrite (M2O2, HIGH);
- analogWrite  (V2,   v);
+ analogWrite  (V2,   v*1.05);
 }
 
 void Horario (int v)
@@ -96,7 +96,7 @@ void GiroDech (int v)
  //Direccion motor B
  digitalWrite (M2O1, HIGH);
  digitalWrite (M2O2, LOW);
- analogWrite  (V2,   v*0.3);
+ analogWrite  (V2,   v*0.5*1.05);
 }
 
 void GiroIzq (int v)
@@ -104,7 +104,7 @@ void GiroIzq (int v)
  //Direccion motor A
  digitalWrite (M1O1, HIGH);
  digitalWrite (M1O2, LOW);
- analogWrite  (V1,   v*0.3);
+ analogWrite  (V1,   v*0.5);
  //Direccion motor B
  digitalWrite (M2O1, HIGH);
  digitalWrite (M2O2, LOW);
