@@ -1,3 +1,5 @@
+#include <hcsr04.h>
+
 // Motor 1, o1 high, o2 low forward, vel pwm value
 int M1O1 = 9;
 int M1O2 = 10; 
