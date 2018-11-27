@@ -1,4 +1,5 @@
 #include <hcsr04.h>
+#include <SoftwareSerial.h>
 
 #define TRIG_PIN1    23
 #define ECHO_PIN1    22
@@ -7,9 +8,9 @@
 
 HCSR04 mySensor1;
 HCSR04 mySensor2;
-unsigned short distance1;
-unsigned short distance2;
-unsigned short referencia;
+int distance1;
+int distance2;
+int referencia;
 int err1=0;
 int err2=0;
 
@@ -28,7 +29,7 @@ void setup() {
 
   mySensor1.init(TRIG_PIN1, ECHO_PIN1);
   mySensor2.init(TRIG_PIN2, ECHO_PIN2);
-  Serial1.begin(9600);
+  Serial.begin(38400);
   // setup motor pin
   // Motor 1
   pinMode (M1O1, OUTPUT);
@@ -43,29 +44,38 @@ void setup() {
 
 void loop(){
   //Reference
-  referencia=Serial1.read();
-  distance1 = mySensor1.readDisctanceInMm();
-  distance2 = mySensor2.readDisctanceInMm();
+  referencia=300;
+  distance1 = mySensor1.readDisctanceInCm();
+  distance2 = mySensor2.readDisctanceInCm();
 
-  err1 = referencia - distance1;
-  err2 = referencia - distance2;
-
-  if(err1 > 0 && err2 > 0)
-  {
-  Avance(100);
-  delay(50);
-  }
-  else if(err1 < 0 && err2 < 0)
-  {
-  Retroceso(100);
-  delay(50);
-  }
-  else if(err1 == 0 || err2 == 0)
-  {
-    delay(50);
-    Serial1.print('Ha llegado a su destino');
-  }
- 
+//  err1 = referencia - distance1;
+//  err2 = referencia - distance2;
+//
+//  if(err1 > 0 && err2 > 0)
+//  {
+//  Avance(100);
+//  delay(50);
+//  }
+//  else if(err1 < 0 && err2 < 0)
+//  {
+//  Retroceso(100);
+//  delay(50);
+//  }
+//  else if(err1 == 0 || err2 == 0)
+//  {
+//    analogWrite  (V1,   0);
+//    analogWrite  (V2,   0);
+//    delay(50);
+//
+//  }
+ Serial.print(distance1);
+ Serial.print(',');
+ Serial.print(distance2);
+ Serial.print(',');
+ Serial.print(V1);
+ Serial.print(',');
+ Serial.print(V2);
+ Serial.println(' ');
 }
 void Avance (int v)
 {
