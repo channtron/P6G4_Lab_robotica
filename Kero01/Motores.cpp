@@ -41,6 +41,7 @@ void motor_direc(int m1, int m2) {
 
 void motor_vel(int v1, int v2) {
   v2=v2*1.05
+  if (v1>255) v1=255;
   if (v2>255) v2=255;
    analogWrite  (V1,   abs(v1));
    analogWrite  (V2,   abs(v2));
