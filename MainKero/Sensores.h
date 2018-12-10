@@ -20,3 +20,4 @@ void lectura(int *distance1, int *distance2){
   *distance1 = sensor1.ping_cm();
   *distance2 = sensor2.ping_cm();
 }
+
