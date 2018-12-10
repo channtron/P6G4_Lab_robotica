@@ -34,14 +34,17 @@ void motor_direc(int v1, int v2) {
   }
   else
   {
-    digitalWrite (M1O1, HIGH);
-    digitalWrite (M1O2, LOW);
+    digitalWrite (M2O1, HIGH);
+    digitalWrite (M2O2, LOW);
   }
   v2=v2*1.05;
   if (v1>255) v1=255;
+  else if(v1<-255) v1=-255;
   if (v2>255) v2=255;
+  else if(v2<-255) v2=-255;
    analogWrite  (V1,   abs(v1));
    analogWrite  (V2,   abs(v2));  
 }
+
 
 
