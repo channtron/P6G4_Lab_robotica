@@ -18,9 +18,11 @@ int e21=0, ei2=0;
 /*Librería para la gestion de los sensores de distancia*/
 #include <NewPing.h>
 
-int *ref, *vel_max;
-int *dis1, *dis2;
-int *v1, *v2;
+int * ref, * vel_max;
+int * dis1, * dis2;
+int * v1, * v2;
+int * mode;
+unsigned long * pt;
 
 void setup () {
 
@@ -31,15 +33,46 @@ void setup () {
   Serial.begin(38400);
   Serial1.begin(38400);
 
-  *vel_max=255;
-  //*ref=30;
+  *vel_max = 255;
+  *pt = millis();
+  *mode = 0;
+  *ref = 30;
   
   
 }
 
 void loop () {
 
-// // Modo prueba de movimientos
+
+// Prueba(); //Prueba de los movimientos basicos de los motores
+
+// // // Modo Controladores
+
+  comunica(ref, vel_max);
+  lectura (dis1, dis2);
+  telemetria(pt, *dis1, *dis2, *ref, *mode, *v1, *v2);
+  
+ //control_TN1(*ref, *dis1, *dis2, v1, v2);
+ //control_P1(*ref, *dis1, *dis2, v1, v2);
+ //control_PID1(*ref, *dis1, *dis2, v1, v2);
+ //control_TN2(*ref, *dis1, *dis2, v1, v2);
+ //control_P2(*ref, *dis1, *dis2, v1, v2);
+ //control_PID2(*ref, *dis1, *dis2, v1, v2);
+ //control_TN3(*dis1, *dis2, v1, v2);
+ //control_P3(*dis1, *dis2, v1, v2);
+ //control_PID3(*dis1, *dis2, v1, v2);
+ //control_TN4(*ref, *dis1, *dis2, v1, v2);
+ //control_P4(*ref, *dis1, *dis2, v1, v2);
+ //control_PID4(*ref, *dis1, *dis2, v1, v2);
+
+  motor_direc( *v1, *v2);
+  delay (50);
+
+}
+
+
+void Prueba(){
+  // // Modo prueba de movimientos
 
 void Adelante(int *v1, int *v2);
 motor_direc( *v1, *v2);
@@ -59,32 +92,5 @@ delay (1000);
 void Girar_der (int *v1, int *v2);
 motor_direc( *v1, *v2);
 delay (1000);
-
-
-// // // Modo Controladores
-
-//comunica();
-//lectura (dis1, dis2);
-
-// lee_serie(vel_max, ref);
-// Serial.println(*ref);
-
- //control_TN1(*ref, *dis1, *dis2, v1, v2);
- //control_P1(*ref, *dis1, *dis2, v1, v2);
- //control_PID1(*ref, *dis1, *dis2, v1, v2);
- //control_TN2(*ref, *dis1, *dis2, v1, v2);
- //control_P2(*ref, *dis1, *dis2, v1, v2);
- //control_PID2(*ref, *dis1, *dis2, v1, v2);
- //control_TN3(*dis1, *dis2, v1, v2);
- //control_P3(*dis1, *dis2, v1, v2);
- //control_PID3(*dis1, *dis2, v1, v2);
- //control_TN4(*ref, *dis1, *dis2, v1, v2);
- //control_P4(*ref, *dis1, *dis2, v1, v2);
- //control_PID4(*ref, *dis1, *dis2, v1, v2);
-
-// motor_direc( *v1, *v2);
-// delay (50);
-
 }
-
 
