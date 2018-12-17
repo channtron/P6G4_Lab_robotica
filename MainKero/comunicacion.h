@@ -1,14 +1,16 @@
+/*El orden para inicializar el modo de control: 1º control, 2º referencia inicial, 3º velocidad inicial, 4º modo*/
+/*A partir de haber inicializado, la velocidad y la referencia se van cambiando para corroborar su funcionamiento*/
 #include <Arduino.h>
 
 /*variable donde se va almacenando el numero leido*/
 int numero;
 /*indican si se está modificando la referencia o la velocidad*/
-int fr=0,fs=0; 
+int fr=0,fs=0,fm=0,fc=0; 
 
-void comunica(int * ref, int * vmax) {
+void comunica(int * ref, int * vmax, int * mfun, int * contr) {
   
-  int refin=*ref, vin=*vmax;
-  
+  int refin=*ref, vin=*vmax, modo=*mfun, control=*contr;
+   
   while (Serial1.available()) {
   
     char character = Serial1.read();
@@ -21,6 +23,8 @@ void comunica(int * ref, int * vmax) {
         numero = 0;
         fr++;
         fs=0;
+        fc=0;
+        fm=0;
       }
 
       /*comando para cambiar la velocidad maxima*/
@@ -28,6 +32,23 @@ void comunica(int * ref, int * vmax) {
         numero = 0;
         fs++;
         fr=0;
+        fc=0;
+        fm=0;
+      }
+
+      else if (character == 'm'){
+        numero = 0;
+        fs=0;
+        fr=0;
+        fc=0;
+        fm++;     
+      }
+       else if (character == 'c'){
+        numero = 0;
+        fs=0;
+        fr=0;
+        fc++;
+        fm=0;     
       }
 
       /*se detecta un numero*/
@@ -51,6 +72,28 @@ void comunica(int * ref, int * vmax) {
         fs = 0;
         vin = numero;
       }
+      /*se ha modificado modo*/ 
+       else if (fm == 1) {
+        fm = 0;
+        if(numero < 5){
+        modo = numero;
+        }
+        else
+        {
+          modo=*mfun;
+        }
+      }
+      /*se ha modificado el control*/
+       else if (fc == 1) {
+        fc = 0;
+         if(numero < 3){
+        control = numero;
+        }
+        else
+        {
+          control=*contr;
+        }
+      }
       
     }
     
@@ -59,6 +102,8 @@ void comunica(int * ref, int * vmax) {
   /*devolucion de los valores de referencia y velocidad*/
   *ref=refin;
   *vmax=vin;
+  *mfun=modo;
+  *contr=control;
   
 }
 
@@ -74,5 +119,3 @@ void telemetria(unsigned long *pt,int dis1, int dis2, int ref, int mode, int v1,
   Serial1.print(v2);
   *pt=t;
 }
-
-
