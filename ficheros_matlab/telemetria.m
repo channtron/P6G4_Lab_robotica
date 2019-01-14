@@ -24,14 +24,14 @@ for i=2:muestras
     tiempo(i)=tiempo(i-1)+tel(i,1);
 end    
 
-
+figure;
 subplot(2,1,1);
-plot(tiempo,tel(:,2), tiempo,tel(:,3), tiempo,tel(:,4));
+plot(tiempo,tel(:,2), tiempo,tel(:,3), tiempo,tel(:,4));grid;
 xlabel('Tiempo (ms)');
 title('Sensores');
 
 subplot(2,1,2);
-plot(tiempo,tel(:,5), tiempo,tel(:,6), tiempo,tel(:,7));
+plot(tiempo,tel(:,5), tiempo,tel(:,6),'y', tiempo,tel(:,7),'g');grid;
 title('Actuadores');
 xlabel('Tiempo (ms)');
 
