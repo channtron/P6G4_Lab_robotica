@@ -5,7 +5,7 @@
 NewPing sensor1 (TRIG_PIN1, ECHO_PIN1, MAX);
 NewPing sensor2 (TRIG_PIN2, ECHO_PIN2, MAX);
 
-
+extern int dis1, dis2;
 
 void sensor_test(){
   delay(500);
@@ -16,8 +16,8 @@ void sensor_test(){
   
 }
 
-void lectura(int *distance1, int *distance2){
-  *distance1 = sensor1.ping_cm();
-  *distance2 = sensor2.ping_cm();
+void lectura(){
+  dis1 = sensor1.ping_cm();
+  dis2 = sensor2.ping_cm();
 }
 

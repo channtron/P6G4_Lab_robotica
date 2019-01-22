@@ -6,10 +6,10 @@
 int numero;
 /*indican si se está modificando la referencia o la velocidad*/
 int fr=0,fs=0,fm=0,fc=0; 
+extern int ref, vel_max, modo, control; 
+extern unsigned long pt;
 
-void comunica(int * ref, int * vmax, int * mfun, int * contr) {
-  
-  int refin=*ref, vin=*vmax, modo=*mfun, control=*contr;
+void comunica() {
    
   while (Serial1.available()) {
   
@@ -64,23 +64,26 @@ void comunica(int * ref, int * vmax, int * mfun, int * contr) {
       /*se ha modificado la referencia*/
       if (fr == 1) {
         fr = 0;
-        refin = numero;
+        ref = numero;
+        Serial.println("Referencia modificada");
       }
 
       /*se ha modificado la velocidad maxima*/
       else if (fs == 1) {
         fs = 0;
-        vin = numero;
+        vel_max = numero;
+        Serial.println("Velocidad maxima modificada");
       }
       /*se ha modificado modo*/ 
        else if (fm == 1) {
         fm = 0;
         if(numero < 5){
         modo = numero;
+        Serial.println("Modo modificada");
         }
         else
         {
-          modo=*mfun;
+          Serial.println("Modo fallo");
         }
       }
       /*se ha modificado el control*/
@@ -88,34 +91,35 @@ void comunica(int * ref, int * vmax, int * mfun, int * contr) {
         fc = 0;
          if(numero < 3){
         control = numero;
+        Serial.println("Control modificado");
         }
         else
         {
-          control=*contr;
+          Serial.println("Control fallo");
         }
       }
       
     }
     
   }
-
-  /*devolucion de los valores de referencia y velocidad*/
-  *ref=refin;
-  *vmax=vin;
-  *mfun=modo;
-  *contr=control;
   
 }
 
-void telemetria(unsigned long *pt,int dis1, int dis2, int ref, int mode, int v1, int v2) { //tiempo anterior, distanciaS1, distanciaS2, referencia, modoC, velocidadM1, velocidadM2
+void telemetria(int dis1, int dis2, int ref, int mode, int v1, int v2) { //tiempo anterior, distanciaS1, distanciaS2, referencia, modoC, velocidadM1, velocidadM2
   unsigned long t=millis();
-  unsigned dt = *pt - t;
-  Serial1.println(dt);
+  unsigned dt = pt - t;
+  Serial1.print(dt);
+  Serial1.print(" ");
   Serial1.print(dis1);
+  Serial1.print(" ");
   Serial1.print(dis2);
+  Serial1.print(" ");
   Serial1.print(ref);
+  Serial1.print(" ");
   Serial1.print(mode);
+  Serial1.print(" ");
   Serial1.print(v1);
-  Serial1.print(v2);
-  *pt=t;
+  Serial1.print(" ");
+  Serial1.println(v2);
+  pt=t;
 }
