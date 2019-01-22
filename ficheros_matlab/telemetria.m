@@ -28,11 +28,18 @@ figure;
 subplot(2,1,1);
 plot(tiempo,tel(:,2), tiempo,tel(:,3), tiempo,tel(:,4));grid;
 xlabel('Tiempo (ms)');
-title('Sensores');
+ylabel('Distancia (cm)');
+title('Modo , Controlador, Sensores');
+%legend('sensor iz','sensor der','referencia');
+xlim(10^6*[0 16]);
+legend('sensor Frontal','sensor Trasero','referencia');
 
 subplot(2,1,2);
 plot(tiempo,tel(:,5), tiempo,tel(:,6),'y', tiempo,tel(:,7),'g');grid;
 title('Actuadores');
 xlabel('Tiempo (ms)');
+ylabel('Velocidad');
+legend('modo','velocidad motor iz','velocidad motor der');
+xlim(10^6*[0 16]);
 
 end
